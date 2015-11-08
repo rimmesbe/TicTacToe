@@ -31,4 +31,11 @@ describe Player do
     end
   end
 
+  describe "#get_player_move" do
+    it "returns the correct players move" do
+      allow(@player_human).to receive(:gets).and_return("8\n")
+      expect(@player_human.get_player_move).to eq "8"
+    end
+  end
+
 end
