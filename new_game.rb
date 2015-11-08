@@ -27,7 +27,15 @@ class Board
   end
 
   def update_board(index, value)
-    @current_board[index.to_i] = value
+    current_board[index.to_i] = value
+  end
+
+  def to_s
+    board_array = []
+    current_board.each_slice(3) {|x| board_array << x}
+    board_array.map do |slot|
+      slot.map(&:to_s).join(" | ")
+    end.join("\n__|___|__\n")
   end
 end
 
