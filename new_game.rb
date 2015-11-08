@@ -19,3 +19,15 @@ class Player
     end
   end
 end
+
+class Board
+  attr_reader :current_board
+  def initialize
+    @current_board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+  end
+
+  def update_board(index, value)
+    @current_board[index.to_i] = value
+  end
+end
+

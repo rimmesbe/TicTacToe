@@ -3,11 +3,11 @@ require_relative '../new_game'
 describe Player do
 
   before :each do
-      @player_human = Player.new(player_name: "Jacob", player_type: "human", player_symbol: "X");
-      @player_computer = Player.new(player_name: "comp1", player_type: "computer", player_symbol: "O");
+      @player_human = Player.new(player_name: "Jacob", player_type: "human", player_symbol: "X")
+      @player_computer = Player.new(player_name: "comp1", player_type: "computer", player_symbol: "O")
   end
 
-  describe "#new" do
+  describe "Player#new" do
     it "takes 3 parameters and returns a Player object" do
       expect(@player_human).to be_a Player
     end
