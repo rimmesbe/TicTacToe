@@ -7,10 +7,15 @@ class Player
     @player_symbol = args[:player_symbol]
   end
 
-  def get_player_move
-    puts "Enter your move: "
-    move = gets.chomp
-    puts move
-    return move
+  def get_player_move(suggested_move = "_")
+    if player_type == "human"
+      puts "Enter your move: "
+      move = gets.chomp
+      puts move
+      return move
+    else
+      puts "Suggesting move #{suggested_move}"
+      return suggested_move
+    end
   end
 end

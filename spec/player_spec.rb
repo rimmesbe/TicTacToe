@@ -36,6 +36,10 @@ describe Player do
       allow(@player_human).to receive(:gets).and_return("8\n")
       expect(@player_human.get_player_move).to eq "8"
     end
+
+    it "returns suggested move if player_type != human" do
+      expect(@player_computer.get_player_move("4")).to eq "4"
+    end
   end
 
 end
