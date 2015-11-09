@@ -1,10 +1,18 @@
 class Game
   attr_reader :board, :player_one, :player_two
 
-  def initialize(player1 = nil, player2 = nil)
+  def initialize
     @board = Board.new
-    @player_one = player1 || Player.new
-    @player_two = player2 || Player.new
+    @player_one = "player one"
+    @player_two = "player two"
+  end
+
+  def start_game
+    puts "Welcome to... X shot first Tic Tac Toe!"
+    puts "Enter player one's information: "
+    player_one = Player.new
+    puts "Enter player two's information: "
+    player_two = Player.new
   end
 
 end
