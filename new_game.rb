@@ -1,3 +1,14 @@
+class Game
+  attr_reader :board, :player_one, :player_two
+
+  def initialize(player1 = nil, player2 = nil)
+    @board = Board.new
+    @player_one = player1 || Player.new
+    @player_two = player2 || Player.new
+  end
+
+end
+
 class Player
   attr_reader :player_name, :player_type, :player_symbol
 
