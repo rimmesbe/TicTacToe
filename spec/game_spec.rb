@@ -2,8 +2,8 @@ require_relative '../new_game'
 
 describe Game do
   before :each do
-    @player1 = Player.new(player_name: "George", player_type: "human", player_symbol: "X")
-    @player2 = Player.new(player_name: "Gateway2000", player_type: "computer", player_symbol: "O")
+    @player1 = Player.new(name: "George", type: "human", symbol: "X")
+    @player2 = Player.new(name: "Gateway2000", type: "computer", symbol: "O")
     @new_game = Game.new
   end
 
