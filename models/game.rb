@@ -22,24 +22,22 @@ class Game
     game_play()
   end
 
-  def symbol_checker(player)
-    p player.symbol
-    until ["x", "o", "X", "O"].include?(player.symbol)
-      puts "Please pick 'X' or 'O' for symbol:"
-      player.create_symbol
-    end
-  end
-
   def game_play
     current_player = @player_one.symbol == "X" ? @player_one : @player_two
     until game_over(@board.current_board) || tie(@board.current_board)
-      puts "#{current_player.name} make your move..."
-      current_move = current_player.type == "human" ? current_player.get_move : current_player.get_move(get_best_move(@board.current_board, current_player))
+      begin
+        puts "#{current_player.name} make your move..."
+        current_move = current_player.type == "human" ? current_player.get_move : current_player.get_move(get_best_move(@board.current_board, current_player))
+      end while non_valid_move(current_move)
       @board.update(current_move, current_player.symbol)
       current_player = player_swap(current_player)
       puts @board
     end
     game_results(current_player)
+  end
+
+  def non_valid_move(move)
+    ["X", "O"].include?(@board.current_board[move.to_i])
   end
 
   def get_best_move(board, current_player)
@@ -102,6 +100,13 @@ class Game
 
   def player_swap(current_player)
     @player_one == current_player ? @player_two : @player_one
+  end
+
+  def symbol_checker(player)
+    until ["x", "o", "X", "O"].include?(player.symbol)
+      puts "Please pick 'X' or 'O' for symbol:"
+      player.create_symbol
+    end
   end
 
   def game_results(current_player)
