@@ -126,18 +126,30 @@ class Player
   private
 
   def create_name
-    puts "Enter player name: "
-    name = STDIN.gets.chomp
+    name = ""
+    until name.length > 0
+      puts "Enter player name: "
+      name = STDIN.gets.chomp
+    end
+    name
   end
 
   def create_symbol
-    puts "Enter player symbol: "
-    symbol = gets.chomp
+    symbol = ""
+    until symbol.length == 1
+      puts "Enter single-digit symbol: "
+      symbol = gets.chomp
+    end
+    symbol
   end
 
   def choose_type
-    puts "Player is human or computer?"
-    type = gets.chomp
+    type = ""
+    until type == "human" || type == "computer"
+      puts "Player is human or computer?"
+      type = gets.chomp
+    end
+    type
   end
 end
 
@@ -160,5 +172,5 @@ class Board
   end
 end
 
-# g = Game.new
-# g.start_game
+g = Game.new
+g.start_game
