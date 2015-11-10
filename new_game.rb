@@ -32,7 +32,6 @@ class Game
 
   def get_best_move(board, current_player)
     available_spaces = []
-    player_symbol = current_player.symbol
     opponent_symbol = player_swap(current_player).symbol
     best_move = nil
 
@@ -42,7 +41,7 @@ class Game
       end
     end
     available_spaces.each do |as|
-      board[as.to_i] = player_symbol
+      board[as.to_i] = current_player.symbol
       if game_over(board)
         best_move = as.to_i
         board[as.to_i] = as
@@ -60,8 +59,14 @@ class Game
     end
     if best_move
       return best_move
+    elsif available_spaces.include?("4")
+      return 4
     else
-      n = rand(0..available_spaces.count)
+      if (board[0] == opponent_symbol && board[8] == opponent_symbol) || (board[2] == opponent_symbol && board[6] == opponent_symbol)
+        available_spaces.each {|as| return as.to_i if (as.to_i % 2 == 1)}
+      end
+      available_spaces.each {|as| return as.to_i if (as.to_i % 2 == 0)}
+      n = rand(0..(available_spaces.count-1))
       return available_spaces[n].to_i
     end
   end
@@ -78,7 +83,7 @@ class Game
   end
 
   def tie(b)
-    b.all? { |s| s == "X" || s == "O" }
+    b.all? { |s| s == @player_one.symbol || s == @player_two.symbol }
   end
 
   private
@@ -155,5 +160,5 @@ class Board
   end
 end
 
-g = Game.new
-g.start_game
+# g = Game.new
+# g.start_game
