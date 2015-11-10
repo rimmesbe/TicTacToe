@@ -1,3 +1,6 @@
+require_relative 'board'
+require_relative 'player'
+
 class Game
   attr_reader :board, :player_one, :player_two
 
@@ -107,75 +110,6 @@ class Game
     else
       puts "#{player_swap(current_player).name} WINS!!!!!!"
     end
-  end
-
-end
-
-class Player
-  attr_reader :name, :type, :symbol
-
-  def initialize(args = {})
-    @name = args[:name] || create_name
-    @type = args[:type] || choose_type
-    @symbol = args[:symbol] || create_symbol
-  end
-
-
-  def get_move(suggested_move = "_")
-    if type == "human"
-      puts "Enter your move: "
-      move = gets.chomp
-      return move
-    else
-      puts "Suggesting move #{suggested_move}"
-      return suggested_move
-    end
-  end
-
-  def create_name
-    name = ""
-    until name.length > 0
-      puts "Enter player name: "
-      name = STDIN.gets.chomp
-    end
-    name
-  end
-
-  def create_symbol
-    @symbol = ""
-    until symbol.length == 1
-      puts "Enter single-digit symbol: "
-      @symbol = gets.chomp
-    end
-    @symbol
-  end
-
-  def choose_type
-    type = ""
-    until type == "human" || type == "computer"
-      puts "Player is human or computer?"
-      type = gets.chomp
-    end
-    type
-  end
-end
-
-class Board
-  attr_reader :current_board
-  def initialize
-    @current_board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-  end
-
-  def update(index, value)
-    current_board[index.to_i] = value
-  end
-
-  def to_s
-    board_array = []
-    current_board.each_slice(3) {|x| board_array << x}
-    board_array.map do |slot|
-      slot.map(&:to_s).join(" | ")
-    end.join("\n__|___|__\n")
   end
 end
 
