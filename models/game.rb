@@ -44,6 +44,7 @@ class Game
 
     board.each do |s|
       if s != @player_one.symbol && s != @player_two.symbol
+      # unless non_valid_move(s)
         available_spaces << s
       end
     end
@@ -108,7 +109,10 @@ class Game
   end
 
   def non_valid_move(move)
-    ["X", "O"].include?(@board.current_board[move.to_i])
+    if move.match(/^[0-8]$/)
+      return ["X", "O"].include?(@board.current_board[move.to_i])
+    end
+    true
   end
 
   def game_results(current_player)
