@@ -32,9 +32,9 @@ class Player
     @symbol = ""
     until symbol.length == 1
       puts "Enter single-digit symbol: "
-      @symbol = gets.chomp
+      @symbol = gets.chomp.upcase
     end
-    @symbol.capitalize!
+    @symbol
   end
 
   def choose_type

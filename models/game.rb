@@ -16,14 +16,14 @@ class Game
     @player_one = Player.new
     symbol_checker(@player_one)
     puts "Enter player two's information: "
-    @player_two = Player.new
-    symbol_checker(@player_two)
+    @player_one.symbol == "X" ? @player_two = Player.new(symbol: "O") : @player_two = Player.new(symbol: "X")
     puts "As you may have guessed... X goes first."
     puts @board
     game_play()
   end
 
   def symbol_checker(player)
+    p player.symbol
     until ["x", "o", "X", "O"].include?(player.symbol)
       puts "Please pick 'X' or 'O' for symbol:"
       player.create_symbol
