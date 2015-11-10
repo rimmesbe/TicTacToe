@@ -27,22 +27,17 @@ class Game
       current_player = player_swap(current_player)
       puts @board
     end
-    puts "Game Over"
-  end
-
-  def player_swap(current_player)
-    @player_one == current_player ? @player_two : @player_one
+    game_results(current_player)
   end
 
   def get_best_move(board, current_player)
     available_spaces = []
-    best_move = nil
     player_symbol = current_player.symbol
     opponent_symbol = player_swap(current_player).symbol
-    p "opponents symbol is #{opponent_symbol}"
+    best_move = nil
 
     board.each do |s|
-      if s != "X" && s != "O"
+      if s != @player_one.symbol && s != @player_two.symbol
         available_spaces << s
       end
     end
@@ -84,6 +79,20 @@ class Game
 
   def tie(b)
     b.all? { |s| s == "X" || s == "O" }
+  end
+
+  private
+
+  def player_swap(current_player)
+    @player_one == current_player ? @player_two : @player_one
+  end
+
+  def game_results(current_player)
+    if tie(@board.current_board)
+      puts "Game ends in a tie... boring."
+    else
+      puts "#{player_swap(current_player).name} WINS!!!!!!"
+    end
   end
 
 end
