@@ -24,10 +24,10 @@ class Game
 
   def game_play
     current_player = @player_one.symbol == "X" ? @player_one : @player_two
-    until game_over(@board.current_board) || tie(@board.current_board)
+    until game_over || tie
       begin
         puts "#{current_player.name} make your move..."
-        current_move = current_player.type == "human" ? current_player.get_move : current_player.get_move(get_best_move(@board.current_board, current_player))
+        current_move = current_player.type == "human" ? current_player.get_move : current_player.get_move(get_best_move(current_player))
       end while non_valid_move(current_move)
       @board.update(current_move, current_player.symbol)
       current_player = player_swap(current_player)
@@ -36,11 +36,8 @@ class Game
     game_results(current_player)
   end
 
-  def non_valid_move(move)
-    ["X", "O"].include?(@board.current_board[move.to_i])
-  end
-
-  def get_best_move(board, current_player)
+  def get_best_move(current_player)
+    board = @board.current_board
     available_spaces = []
     opponent_symbol = player_swap(current_player).symbol
     best_move = nil
@@ -81,7 +78,8 @@ class Game
     end
   end
 
-  def game_over(b)
+  def game_over
+    b = @board.current_board
     [b[0], b[1], b[2]].uniq.length == 1 ||
     [b[3], b[4], b[5]].uniq.length == 1 ||
     [b[6], b[7], b[8]].uniq.length == 1 ||
@@ -92,8 +90,8 @@ class Game
     [b[2], b[4], b[6]].uniq.length == 1
   end
 
-  def tie(b)
-    b.all? { |s| s == @player_one.symbol || s == @player_two.symbol }
+  def tie
+    @board.current_board.all? { |s| s == @player_one.symbol || s == @player_two.symbol }
   end
 
   private
@@ -107,6 +105,10 @@ class Game
       puts "Please pick 'X' or 'O' for symbol:"
       player.create_symbol
     end
+  end
+
+  def non_valid_move(move)
+    ["X", "O"].include?(@board.current_board[move.to_i])
   end
 
   def game_results(current_player)
