@@ -11,11 +11,20 @@ class Game
     puts "Welcome to... X shot first Tic Tac Toe!"
     puts "Enter player one's information: "
     @player_one = Player.new
+    symbol_checker(@player_one)
     puts "Enter player two's information: "
     @player_two = Player.new
+    symbol_checker(@player_two)
     puts "As you may have guessed... X goes first."
     puts @board
     game_play()
+  end
+
+  def symbol_checker(player)
+    until ["x", "o", "X", "O"].include?(player.symbol)
+      puts "Please pick 'X' or 'O' for symbol:"
+      player.create_symbol
+    end
   end
 
   def game_play
@@ -123,8 +132,6 @@ class Player
     end
   end
 
-  private
-
   def create_name
     name = ""
     until name.length > 0
@@ -135,12 +142,12 @@ class Player
   end
 
   def create_symbol
-    symbol = ""
+    @symbol = ""
     until symbol.length == 1
       puts "Enter single-digit symbol: "
-      symbol = gets.chomp
+      @symbol = gets.chomp
     end
-    symbol
+    @symbol
   end
 
   def choose_type
