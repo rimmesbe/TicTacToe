@@ -17,9 +17,9 @@ describe Board do
     end
   end
 
-  describe "#update_board" do
+  describe "#update" do
     it "changes one spot on current board" do
-      @new_board.update_board("4", "X")
+      @new_board.update("4", "X")
       expect(@new_board.current_board).to eq ["0", "1", "2", "3", "X", "5", "6", "7", "8"]
     end
   end
