@@ -29,7 +29,7 @@ class Game
         puts "#{current_player.name} make your move..."
         current_move = current_player.type == "human" ? current_player.get_move : current_player.get_move(get_best_move(current_player))
       end while non_valid_move(current_move)
-      @board.update(current_move, current_player.symbol)
+      @board.update(current_move.to_i, current_player.symbol)
       current_player = player_swap(current_player)
       puts @board
     end
@@ -40,44 +40,26 @@ class Game
     board = @board.current_board
     available_spaces = []
     opponent_symbol = player_swap(current_player).symbol
-    best_move = nil
 
     board.each do |s|
-      if s != @player_one.symbol && s != @player_two.symbol
-      # unless non_valid_move(s)
+      unless non_valid_move(s)
         available_spaces << s
+        return s if one_move_away(current_player.symbol, s)
       end
     end
-    available_spaces.each do |as|
-      board[as.to_i] = current_player.symbol
-      if game_over
-        best_move = as.to_i
-        board[as.to_i] = as
-        return best_move
-      else
-        board[as.to_i] = opponent_symbol
-        if game_over
-          best_move = as.to_i
-          board[as.to_i] = as
-          return best_move
-        else
-          board[as.to_i] = as
-        end
-      end
-    end
-    if best_move
-      return best_move
-    elsif available_spaces.include?("4")
-      return 4
+    available_spaces.each {|as| return as if one_move_away(opponent_symbol, as) }
+    if available_spaces.include?("4")
+      return "4"
     else
       if (board[0] == opponent_symbol && board[8] == opponent_symbol) || (board[2] == opponent_symbol && board[6] == opponent_symbol)
-        available_spaces.each {|as| return as.to_i if (as.to_i % 2 == 1)}
+        available_spaces.each {|as| return as if (as.to_i % 2 == 1)}
       end
-      available_spaces.each {|as| return as.to_i if (as.to_i % 2 == 0)}
-      n = rand(0..(available_spaces.count-1))
-      return available_spaces[n].to_i
+      available_spaces.each {|as| return as if (as.to_i % 2 == 0)}
+      return available_spaces[0]
     end
   end
+
+  private
 
   def game_over
     b = @board.current_board
@@ -95,14 +77,12 @@ class Game
     @board.current_board.all? { |s| s == @player_one.symbol || s == @player_two.symbol }
   end
 
-  private
-
   def player_swap(current_player)
     @player_one == current_player ? @player_two : @player_one
   end
 
   def symbol_checker(player)
-    until ["x", "o", "X", "O"].include?(player.symbol)
+    until ["X", "O"].include?(player.symbol)
       puts "Please pick 'X' or 'O' for symbol:"
       player.create_symbol
     end
@@ -113,6 +93,16 @@ class Game
       return ["X", "O"].include?(@board.current_board[move.to_i])
     end
     true
+  end
+
+  def one_move_away(player_symbol, spot)
+    @board.current_board[spot.to_i] = player_symbol
+    if game_over
+      @board.current_board[spot.to_i] = spot
+      return true
+    end
+    @board.current_board[spot.to_i] = spot
+    false
   end
 
   def game_results(current_player)
