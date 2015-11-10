@@ -34,7 +34,7 @@ class Player
       puts "Enter single-digit symbol: "
       @symbol = gets.chomp
     end
-    @symbol
+    @symbol.capitalize!
   end
 
   def choose_type
