@@ -49,13 +49,13 @@ class Game
     end
     available_spaces.each do |as|
       board[as.to_i] = current_player.symbol
-      if game_over(board)
+      if game_over
         best_move = as.to_i
         board[as.to_i] = as
         return best_move
       else
         board[as.to_i] = opponent_symbol
-        if game_over(board)
+        if game_over
           best_move = as.to_i
           board[as.to_i] = as
           return best_move
@@ -112,7 +112,7 @@ class Game
   end
 
   def game_results(current_player)
-    if tie(@board.current_board)
+    if tie
       puts "Game ends in a tie... boring."
     else
       puts "#{player_swap(current_player).name} WINS!!!!!!"
