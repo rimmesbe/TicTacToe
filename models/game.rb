@@ -89,10 +89,7 @@ class Game
   end
 
   def non_valid_move(move)
-    if move.match(/^[0-8]$/)
-      return ["X", "O"].include?(@board.current_board[move.to_i])
-    end
-    true
+    move.match(/^[0-8]$/) ? ["X", "O"].include?(@board.current_board[move.to_i]) : true
   end
 
   def one_move_away(player_symbol, spot)
@@ -106,11 +103,7 @@ class Game
   end
 
   def game_results(current_player)
-    if tie
-      puts "Game ends in a tie... boring."
-    else
-      puts "#{player_swap(current_player).name} WINS!!!!!!"
-    end
+    tie ? (puts "Game ends in a tie... boring.") : (puts "#{player_swap(current_player).name} WINS!!!!!!")
   end
 end
 
