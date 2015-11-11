@@ -5,7 +5,7 @@ class Game
   attr_reader :board, :player_one, :player_two
 
   def initialize
-    @board = Board.new
+    @board = Board.new(3, 3)
     @player_one = "player one"
     @player_two = "player two"
   end
