@@ -2,7 +2,7 @@ require_relative 'board'
 require_relative 'player'
 
 class Game
-  attr_reader :board, :player_one, :player_two
+  attr_accessor :board, :player_one, :player_two
 
   def initialize
     @board = Board.new(3, 3)
@@ -104,9 +104,9 @@ class Game
   end
 
   def game_results(current_player)
-    tie ? (puts "Game ends in a tie... boring.") : (puts "#{player_swap(current_player).name} WINS!!!!!!")
+    game_over ? (puts "#{player_swap(current_player).name} WINS!!!!!!") : (puts "Game ends in a tie... boring.")
   end
 end
 
-g = Game.new
-g.start_game
+# g = Game.new
+# g.start_game
