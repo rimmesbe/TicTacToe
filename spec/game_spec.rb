@@ -6,6 +6,8 @@ describe Game do
     @computer_player_one = Player.new(name: "IBM", type: "computer", symbol: "O")
     @computer_player_two = Player.new(name: "Gateway2000", type: "computer", symbol: "X")
     @new_game = Game.new
+    @new_game.player_one = @computer_player_one
+    @new_game.player_two = @computer_player_two
   end
 
   describe "game#new" do
@@ -18,8 +20,20 @@ describe Game do
     end
 
     it "has Player attributes" do
-      expect(@new_game.player_one).to eq "player one"
-      expect(@new_game.player_two).to eq "player two"
+      expect(@new_game.player_one).to be_a Player
+      expect(@new_game.player_two).to be_a Player
     end
   end
+
+  describe "game#tie" do
+    it "returns false when board not full" do
+      expect(@new_game.tie).to be false
+    end
+
+    it "returns true when board is full" do
+      @new_game.board.current_board.map! { |spot| "X"}
+      expect(@new_game.tie).to be true
+    end
+  end
+
 end

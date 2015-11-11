@@ -60,8 +60,6 @@ class Game
     end
   end
 
-  private
-
   def game_over
     b = @board.current_board
     [b[0], b[1], b[2]].uniq.length == 1 ||
