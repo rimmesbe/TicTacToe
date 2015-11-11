@@ -24,25 +24,25 @@ class Game
   end
 
   def game_play
-    current_player = @player_one.symbol == "X" ? @player_one : @player_two
+    current_player = player_one.symbol == "X" ? player_one : player_two
     until game_over || tie
       begin
         puts "#{current_player.name} make your move..."
         current_move = current_player.type == "human" ? current_player.get_move : current_player.get_move(get_best_move(current_player))
       end while non_valid_move(current_move)
-      @board.update(current_move.to_i, current_player.symbol)
+      board.update(current_move.to_i, current_player.symbol)
       current_player = player_swap(current_player)
-      puts @board
+      puts board
     end
     "The Winner is... "+ game_results(current_player)+ "."
   end
 
   def get_best_move(current_player)
-    board = @board.current_board
+    b = board.current_board
     available_spaces = []
     opponent_symbol = player_swap(current_player).symbol
 
-    board.each do |spot|
+    b.each do |spot|
       unless non_valid_move(spot)
         available_spaces << spot
         return spot if one_move_away(current_player.symbol, spot)
@@ -53,7 +53,7 @@ class Game
       return "4"
     else
       # opposite corners counter move
-      if (board[0] == opponent_symbol && board[8] == opponent_symbol) || (board[2] == opponent_symbol && board[6] == opponent_symbol)
+      if (b[0] == opponent_symbol && b[8] == opponent_symbol) || (b[2] == opponent_symbol && b[6] == opponent_symbol)
         available_spaces.each {|available_spot| return available_spot if (available_spot.to_i % 2 == 1)}
       end
       available_spaces.each {|available_spot| return available_spot if (available_spot.to_i % 2 == 0)}
@@ -68,7 +68,7 @@ class Game
   end
 
   def game_over
-    b = @board.current_board
+    b = board.current_board
     [b[0], b[1], b[2]].uniq.length == 1 ||
     [b[3], b[4], b[5]].uniq.length == 1 ||
     [b[6], b[7], b[8]].uniq.length == 1 ||
@@ -80,11 +80,11 @@ class Game
   end
 
   def tie
-    @board.current_board.all? { |s| s == @player_one.symbol || s == @player_two.symbol }
+    board.current_board.all? { |s| s == player_one.symbol || s == player_two.symbol }
   end
 
   def player_swap(current_player)
-    @player_one == current_player ? @player_two : @player_one
+    player_one == current_player ? player_two : player_one
   end
 
   def symbol_checker(player)
@@ -95,19 +95,19 @@ class Game
   end
 
   def non_valid_move(move)
-    move.match(/^[0-8]$/) ? ["X", "O"].include?(@board.current_board[move.to_i]) : true
+    move.match(/^[0-8]$/) ? ["X", "O"].include?(board.current_board[move.to_i]) : true
   end
 
   def one_move_away(player_symbol, spot)
-    @board.current_board[spot.to_i] = player_symbol
+    board.current_board[spot.to_i] = player_symbol
     if game_over
-      @board.current_board[spot.to_i] = spot
+      board.current_board[spot.to_i] = spot
       return true
     end
-    @board.current_board[spot.to_i] = spot
+    board.current_board[spot.to_i] = spot
     false
   end
 end
 
-# g = Game.new
-# p g.start_game
+g = Game.new
+p g.start_game
