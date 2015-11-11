@@ -27,28 +27,28 @@ describe Game do
 
   describe "game#tie" do
     it "returns false when board not full" do
-      expect(@new_game.tie).to be false
+      expect(@new_game.send(:tie)).to be false
     end
 
     it "returns true when board is full" do
       @new_game.board.current_board.map! { |spot| "X"}
-      expect(@new_game.tie).to be true
+      expect(@new_game.send(:tie)).to be true
     end
   end
 
   describe "game#game_over" do
     it "returns false if they're are not 3 in row symbols" do
-      expect(@new_game.game_over).to be false
+      expect(@new_game.send(:game_over)).to be false
     end
 
     it "returns true if 3 symbols are in a row horizontal" do
       3.times {|i| @new_game.board.current_board[i] = "X"}
-      expect(@new_game.game_over).to be true
+      expect(@new_game.send(:game_over)).to be true
     end
 
     it "returns true if 3 symbols are in a row verticle" do
       [0, 3, 6].each {|n| @new_game.board.current_board[n] = "X"}
-      expect(@new_game.game_over).to be true
+      expect(@new_game.send(:game_over)).to be true
     end
 
     it "returns true if 3 symbols are in a row diagonally" do

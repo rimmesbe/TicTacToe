@@ -60,6 +60,12 @@ class Game
     end
   end
 
+  private
+
+  def game_results(current_player)
+    game_over ? (puts "#{player_swap(current_player).name} WINS!!!!!!") : (puts "Game ends in a tie... boring.")
+  end
+
   def game_over
     b = @board.current_board
     [b[0], b[1], b[2]].uniq.length == 1 ||
@@ -99,10 +105,6 @@ class Game
     end
     @board.current_board[spot.to_i] = spot
     false
-  end
-
-  def game_results(current_player)
-    game_over ? (puts "#{player_swap(current_player).name} WINS!!!!!!") : (puts "Game ends in a tie... boring.")
   end
 end
 
