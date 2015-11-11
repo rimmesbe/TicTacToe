@@ -25,6 +25,19 @@ describe Game do
     end
   end
 
+  describe "game#game_play" do
+    it "should return winner when there is a winner" do
+      @new_game.player_two = @human_player
+      [0,1].each {|s| @new_game.board.current_board[s] = "X"}
+      allow(@new_game.player_two).to receive(:gets).and_return("2")
+      expect(@new_game.game_play).to eq "The Winner is... George."
+    end
+
+    it "should return winner as Tie with 2 computer players" do
+      expect(@new_game.game_play).to eq "The Winner is... Tie Game."
+    end
+  end
+
   describe "game#tie" do
     it "returns false when board not full" do
       expect(@new_game.send(:tie)).to be false
@@ -53,7 +66,7 @@ describe Game do
 
     it "returns true if 3 symbols are in a row diagonally" do
       [0, 4, 8].each {|n| @new_game.board.current_board[n] = "X"}
-      expect(@new_game.game_over).to be true
+      expect(@new_game.send(:game_over)).to be true
     end
   end
 

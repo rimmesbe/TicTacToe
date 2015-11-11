@@ -2,12 +2,13 @@ require_relative 'board'
 require_relative 'player'
 
 class Game
-  attr_accessor :board, :player_one, :player_two
-
+  attr_accessor :player_one, :player_two
+  attr_reader :winner, :board
   def initialize
     @board = Board.new(3, 3)
     @player_one = "player one"
     @player_two = "player two"
+    @winner = ""
   end
 
   def start_game
@@ -33,7 +34,7 @@ class Game
       current_player = player_swap(current_player)
       puts @board
     end
-    game_results(current_player)
+    "The Winner is... "+ game_results(current_player)+ "."
   end
 
   def get_best_move(current_player)
@@ -63,7 +64,7 @@ class Game
   private
 
   def game_results(current_player)
-    game_over ? (puts "#{player_swap(current_player).name} WINS!!!!!!") : (puts "Game ends in a tie... boring.")
+    game_over ? winner = player_swap(current_player).name : winner = "Tie Game"
   end
 
   def game_over
@@ -109,4 +110,4 @@ class Game
 end
 
 # g = Game.new
-# g.start_game
+# p g.start_game
