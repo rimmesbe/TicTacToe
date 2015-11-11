@@ -85,7 +85,7 @@ class Game
   def symbol_checker(player)
     until ["X", "O"].include?(player.symbol)
       puts "Please pick 'X' or 'O' for symbol:"
-      player.create_symbol
+      player.symbol = player.create_symbol
     end
   end
 
