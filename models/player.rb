@@ -1,5 +1,6 @@
 class Player
-  attr_reader :name, :type, :symbol
+  attr_reader :name, :type
+  attr_accessor :symbol
 
   def initialize(args = {})
     @name = args[:name] || create_name
@@ -23,18 +24,18 @@ class Player
     name = ""
     until name.length > 0
       puts "Enter player name: "
-      name = STDIN.gets.chomp
+      name = gets.chomp
     end
     name
   end
 
   def create_symbol
-    @symbol = ""
+    symbol = ""
     until symbol.length == 1
       puts "Enter single-digit symbol: "
-      @symbol = gets.chomp.upcase
+      symbol = gets.chomp.upcase
     end
-    @symbol
+    symbol
   end
 
   def choose_type
