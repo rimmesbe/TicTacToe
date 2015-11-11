@@ -36,4 +36,25 @@ describe Game do
     end
   end
 
+  describe "game#game_over" do
+    it "returns false if they're are not 3 in row symbols" do
+      expect(@new_game.game_over).to be false
+    end
+
+    it "returns true if 3 symbols are in a row horizontal" do
+      3.times {|i| @new_game.board.current_board[i] = "X"}
+      expect(@new_game.game_over).to be true
+    end
+
+    it "returns true if 3 symbols are in a row verticle" do
+      [0, 3, 6].each {|n| @new_game.board.current_board[n] = "X"}
+      expect(@new_game.game_over).to be true
+    end
+
+    it "returns true if 3 symbols are in a row diagonally" do
+      [0, 4, 8].each {|n| @new_game.board.current_board[n] = "X"}
+      expect(@new_game.game_over).to be true
+    end
+  end
+
 end
