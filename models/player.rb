@@ -24,7 +24,7 @@ class Player
     name = ""
     until name.length > 0
       puts "Enter player name: "
-      name = STDIN.gets.chomp
+      name = gets.chomp
     end
     name
   end

@@ -42,4 +42,25 @@ describe Player do
     end
   end
 
+  describe "#create_name" do
+    it "returns user input as new name of player" do
+      allow(@player_human).to receive(:gets).and_return("Joe\n")
+      expect(@player_human.create_name).to eq "Joe"
+    end
+  end
+
+  describe "#create_symbol" do
+    it "returns user input as new symbol of player" do
+      allow(@player_human).to receive(:gets).and_return("O\n")
+      expect(@player_human.create_symbol).to eq "O"
+    end
+  end
+
+  describe "#choose_type" do
+    it "returns user input as new type of player" do
+      allow(@player_human).to receive(:gets).and_return("computer\n")
+      expect(@player_human.choose_type).to eq "computer"
+    end
+  end
+
 end
