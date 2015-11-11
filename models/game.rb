@@ -41,20 +41,21 @@ class Game
     available_spaces = []
     opponent_symbol = player_swap(current_player).symbol
 
-    board.each do |s|
-      unless non_valid_move(s)
-        available_spaces << s
-        return s if one_move_away(current_player.symbol, s)
+    board.each do |spot|
+      unless non_valid_move(spot)
+        available_spaces << spot
+        return spot if one_move_away(current_player.symbol, spot)
       end
     end
-    available_spaces.each {|as| return as if one_move_away(opponent_symbol, as) }
+    available_spaces.each {|available_spot| return available_spot if one_move_away(opponent_symbol, available_spot) }
     if available_spaces.include?("4")
       return "4"
     else
+      # opposite corners counter move
       if (board[0] == opponent_symbol && board[8] == opponent_symbol) || (board[2] == opponent_symbol && board[6] == opponent_symbol)
-        available_spaces.each {|as| return as if (as.to_i % 2 == 1)}
+        available_spaces.each {|available_spot| return available_spot if (available_spot.to_i % 2 == 1)}
       end
-      available_spaces.each {|as| return as if (as.to_i % 2 == 0)}
+      available_spaces.each {|available_spot| return available_spot if (available_spot.to_i % 2 == 0)}
       return available_spaces[0]
     end
   end
