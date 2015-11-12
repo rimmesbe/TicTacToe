@@ -71,21 +71,21 @@ class Game
     game_over ? winner = player_swap(current_player).name : winner = "Tie Game"
   end
 
-  def game_over
-    b = board.current_board
-    [b[0], b[1], b[2]].uniq.length == 1 ||
-    [b[3], b[4], b[5]].uniq.length == 1 ||
-    [b[6], b[7], b[8]].uniq.length == 1 ||
-    [b[0], b[3], b[6]].uniq.length == 1 ||
-    [b[1], b[4], b[7]].uniq.length == 1 ||
-    [b[2], b[5], b[8]].uniq.length == 1 ||
-    [b[0], b[4], b[8]].uniq.length == 1 ||
-    [b[2], b[4], b[6]].uniq.length == 1
-  end
+  # def game_over
+  #   b = board.current_board
+  #   [b[0], b[1], b[2]].uniq.length == 1 ||
+  #   [b[3], b[4], b[5]].uniq.length == 1 ||
+  #   [b[6], b[7], b[8]].uniq.length == 1 ||
+  #   [b[0], b[3], b[6]].uniq.length == 1 ||
+  #   [b[1], b[4], b[7]].uniq.length == 1 ||
+  #   [b[2], b[5], b[8]].uniq.length == 1 ||
+  #   [b[0], b[4], b[8]].uniq.length == 1 ||
+  #   [b[2], b[4], b[6]].uniq.length == 1
+  # end
 
-  def tie
-    board.current_board.all? { |s| s == player_one.symbol || s == player_two.symbol }
-  end
+  # def tie
+  #   board.current_board.all? { |s| s == player_one.symbol || s == player_two.symbol }
+  # end
 
   def player_swap(current_player)
     player_one == current_player ? player_two : player_one
@@ -98,19 +98,19 @@ class Game
     end
   end
 
-  def non_valid_move(move)
-    move.match(/^[0-8]$/) ? ["X", "O"].include?(board.current_board[move.to_i]) : true
-  end
+  # def non_valid_move(move)
+  #   move.match(/^[0-8]$/) ? ["X", "O"].include?(board.current_board[move.to_i]) : true
+  # end
 
-  def one_move_away(player_symbol, spot)
-    board.current_board[spot.to_i] = player_symbol
-    if game_over
-      board.current_board[spot.to_i] = spot
-      return true
-    end
-    board.current_board[spot.to_i] = spot
-    false
-  end
+  # def one_move_away(player_symbol, spot)
+  #   board.current_board[spot.to_i] = player_symbol
+  #   if game_over
+  #     board.current_board[spot.to_i] = spot
+  #     return true
+  #   end
+  #   board.current_board[spot.to_i] = spot
+  #   false
+  # end
 
   def screen_reset
     sleep 1.5
