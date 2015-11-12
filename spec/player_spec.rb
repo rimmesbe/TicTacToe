@@ -8,7 +8,7 @@ describe Player do
       allow($stdout).to receive(:puts)
   end
 
-  describe "Player#new" do
+  describe "#new" do
     it "takes 3 parameters and returns a Player object" do
       expect(@player_human).to be_a Player
     end

@@ -81,16 +81,6 @@ class Tic_Tac_Toe_Board < Board
     move.match(/^[0-8]$/) ? ["X", "O"].include?(current_board[move.to_i]) : true
   end
 
-  def one_move_away(symbol, spot)
-    current_board[spot.to_i] = symbol
-    if game_over
-      current_board[spot.to_i] = spot
-      return true
-    end
-    current_board[spot.to_i] = spot
-    false
-  end
-
   def tie
     current_board.all? { |s| s == "X" || s == "O" }
   end
@@ -104,5 +94,17 @@ class Tic_Tac_Toe_Board < Board
     [current_board[2], current_board[5], current_board[8]].uniq.length == 1 ||
     [current_board[0], current_board[4], current_board[8]].uniq.length == 1 ||
     [current_board[2], current_board[4], current_board[6]].uniq.length == 1
+  end
+
+  private
+
+  def one_move_away(symbol, spot)
+    current_board[spot.to_i] = symbol
+    if game_over
+      current_board[spot.to_i] = spot
+      return true
+    end
+    current_board[spot.to_i] = spot
+    false
   end
 end
