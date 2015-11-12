@@ -22,7 +22,6 @@ class Game
       puts "#{player_one.name} picked #{player_one.symbol}."
       player_two.symbol = player_two.create_symbol
     end
-    unique_player_symbols(player_two)
     puts "#{player_two.name}'s symbol is #{player_two.symbol}"
     screen_reset
     puts "As you may have guessed... X goes first."
@@ -65,5 +64,5 @@ class Game
   end
 end
 
-g = Game.new(Tic_Tac_Toe_Board.new)
-p g.start_game
+# g = Game.new(Tic_Tac_Toe_Board.new)
+# p g.start_game
