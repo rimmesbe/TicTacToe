@@ -16,8 +16,11 @@ class Game
     puts "Enter player one's information: "
     @player_one = Player.new
     symbol_checker(@player_one)
+    screen_reset
     puts "Enter player two's information: "
     @player_one.symbol == "X" ? @player_two = Player.new(symbol: "O") : @player_two = Player.new(symbol: "X")
+    puts "#{player_two.name}'s symbol is #{player_two.symbol}"
+    screen_reset
     puts "As you may have guessed... X goes first."
     puts @board
     game_play()
@@ -30,6 +33,7 @@ class Game
         puts "#{current_player.name} make your move..."
         current_move = current_player.type == "human" ? current_player.get_move : current_player.get_move(get_best_move(current_player))
       end while non_valid_move(current_move)
+      screen_reset
       board.update(current_move.to_i, current_player.symbol)
       current_player = player_swap(current_player)
       puts board
@@ -107,7 +111,12 @@ class Game
     board.current_board[spot.to_i] = spot
     false
   end
+
+  def screen_reset
+    sleep 1.5
+    system "clear"
+  end
 end
 
-g = Game.new
-p g.start_game
+# g = Game.new
+# p g.start_game
