@@ -11,7 +11,7 @@ describe Game do
     allow(@new_game).to receive(:screen_reset)
   end
 
-  describe "game#new" do
+  describe "#new" do
     it "creates new Game object" do
       expect(@new_game).to be_a Game
     end
@@ -21,7 +21,7 @@ describe Game do
     end
   end
 
-  describe "game#game_play" do
+  describe "#game_play" do
     it "should return winner when there is a winner" do
       @human_player = Player.new(name: "George", type: "human", symbol: "X")
       @new_game.player_two = @human_player
