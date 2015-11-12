@@ -4,8 +4,8 @@ require_relative 'player'
 class Game
   attr_accessor :player_one, :player_two
   attr_reader :winner, :board
-  def initialize
-    @board = Board.new(3, 3)
+  def initialize(game_board)
+    @board = game_board
     @player_one = "player one"
     @player_two = "player two"
     @winner = ""
@@ -14,16 +14,25 @@ class Game
   def start_game
     puts "Welcome to... X shot first Tic Tac Toe!"
     puts "Enter player one's information: "
-    @player_one = Player.new
-    symbol_checker(@player_one)
+    player_one = Player.new
+    board.symbol_checker(player_one.symbol)
     screen_reset
     puts "Enter player two's information: "
-    @player_one.symbol == "X" ? @player_two = Player.new(symbol: "O") : @player_two = Player.new(symbol: "X")
+    player_two = Player.new
+    board.symbol_checker(player_two.symbol)
+    unique_player_symbols(player_two)
     puts "#{player_two.name}'s symbol is #{player_two.symbol}"
     screen_reset
     puts "As you may have guessed... X goes first."
-    puts @board
+    puts board
     game_play()
+  end
+
+  def unique_player_symbols(player)
+    until player.symbol != player_swap(player).symbol
+      puts "#{player_swap(player).name} already picked that symbol."
+      player.create_symbol
+    end
   end
 
   def game_play
