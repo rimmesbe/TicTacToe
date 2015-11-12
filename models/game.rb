@@ -18,8 +18,10 @@ class Game
     screen_reset
     puts "Enter player two's information: "
     @player_two = Player.new
-    until board.symbol_checker(player_two.symbol) do player_two.symbol = player_two.create_symbol end
-      #TODO FIX THIS LOGIC
+    until unique_player_symbols(player_two) && board.symbol_checker(player_two.symbol)
+      puts "#{player_one.name} picked #{player_one.symbol}."
+      player_two.symbol = player_two.create_symbol
+    end
     unique_player_symbols(player_two)
     puts "#{player_two.name}'s symbol is #{player_two.symbol}"
     screen_reset
@@ -29,8 +31,8 @@ class Game
 
   def game_play
     current_player = player_one.symbol == board.first_player ? player_one : player_two
+    puts board
     until board.game_over || board.tie
-      puts board
       begin
         puts "#{current_player.name} make your move..."
         current_move = current_player.type == "human" ? current_player.get_move : current_player.get_move(board.get_best_move(current_player.symbol))
@@ -46,10 +48,7 @@ class Game
   private
 
   def unique_player_symbols(player)
-    until player.symbol != player_swap(player).symbol
-      puts "#{player_swap(player).name} already picked that symbol."
-      player.create_symbol
-    end
+    player.symbol != player_swap(player).symbol
   end
 
   def game_results(current_player)
