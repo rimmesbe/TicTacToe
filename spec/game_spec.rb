@@ -2,11 +2,7 @@ require_relative '../models/game'
 
 describe Game do
   before :each do
-    @computer_player_one = Player.new(name: "IBM", type: "computer", symbol: "O")
-    @computer_player_two = Player.new(name: "Gateway2000", type: "computer", symbol: "X")
     @new_game = Game.new(Tic_Tac_Toe_Board.new)
-    @new_game.player_one = @computer_player_one
-    @new_game.player_two = @computer_player_two
     allow($stdout).to receive(:puts)
     allow(@new_game).to receive(:screen_reset)
   end
@@ -31,6 +27,10 @@ describe Game do
     end
 
     it "should return winner as Tie with 2 computer players" do
+      @computer_player_one = Player.new(name: "IBM", type: "computer", symbol: "O")
+      @computer_player_two = Player.new(name: "Gateway2000", type: "computer", symbol: "X")
+      @new_game.player_one = @computer_player_one
+      @new_game.player_two = @computer_player_two
       expect(@new_game.game_play).to eq "The Winner is... Tie Game."
     end
   end
