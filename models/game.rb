@@ -3,12 +3,11 @@ require_relative 'player'
 
 class Game
   attr_accessor :player_one, :player_two
-  attr_reader :winner, :board
+  attr_reader :board
   def initialize(game_board)
     @board = game_board
     @player_one = "player one"
     @player_two = "player two"
-    @winner = ""
   end
 
   def start_game
@@ -25,20 +24,13 @@ class Game
     puts "#{player_two.name}'s symbol is #{player_two.symbol}"
     screen_reset
     puts "As you may have guessed... X goes first."
-    puts board
     game_play()
-  end
-
-  def unique_player_symbols(player)
-    until player.symbol != player_swap(player).symbol
-      puts "#{player_swap(player).name} already picked that symbol."
-      player.create_symbol
-    end
   end
 
   def game_play
     current_player = player_one.symbol == board.first_player ? player_one : player_two
     until board.game_over || board.tie
+      puts board
       begin
         puts "#{current_player.name} make your move..."
         current_move = current_player.type == "human" ? current_player.get_move : current_player.get_move(board.get_best_move(current_player.symbol))
@@ -53,12 +45,19 @@ class Game
 
   private
 
+  def unique_player_symbols(player)
+    until player.symbol != player_swap(player).symbol
+      puts "#{player_swap(player).name} already picked that symbol."
+      player.create_symbol
+    end
+  end
+
   def game_results(current_player)
-    board.game_over ? winner = player_swap(current_player).name : winner = "Tie Game"
+    board.game_over ? player_swap(current_player).name : "Tie Game"
   end
 
   def player_swap(current_player)
-    @player_one == current_player ? @player_two : @player_one
+    player_one == current_player ? player_two : player_one
   end
 
   def screen_reset
