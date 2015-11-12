@@ -8,6 +8,8 @@ describe Game do
     @new_game = Game.new
     @new_game.player_one = @computer_player_one
     @new_game.player_two = @computer_player_two
+    allow($stdout).to receive(:puts)
+    allow(@new_game).to receive(:screen_reset)
   end
 
   describe "game#new" do

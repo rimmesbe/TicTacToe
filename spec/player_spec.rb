@@ -5,6 +5,7 @@ describe Player do
   before :each do
       @player_human = Player.new(name: "Jacob", type: "human", symbol: "X")
       @player_computer = Player.new(name: "comp1", type: "computer", symbol: "O")
+      allow($stdout).to receive(:puts)
   end
 
   describe "Player#new" do
