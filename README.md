@@ -2,7 +2,7 @@
 
 
 To Run tests:
-1)make sure driver code at end of models/game.rb is commented out "\n"
+1)make sure driver code at end of models/game.rb is commented out <br>
 2)make sure you have rspec version 3.3.2
 3)run spec folder from console
 
