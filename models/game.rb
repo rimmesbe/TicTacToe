@@ -41,7 +41,7 @@ class Game
       current_player = player_swap(current_player)
       puts board
     end
-    "The Winner is... "+ game_results(current_player)+ "."
+    game_results(current_player)
   end
 
   private
@@ -51,7 +51,7 @@ class Game
   end
 
   def game_results(current_player)
-    board.game_over ? player_swap(current_player).name : "Tie Game"
+    board.game_over ? "The Winner is #{player_swap(current_player).name}." : "Tie Game."
   end
 
   def player_swap(current_player)
@@ -64,5 +64,5 @@ class Game
   end
 end
 
-g = Game.new(Tic_Tac_Toe_Board.new)
-p g.start_game
+# g = Game.new(Tic_Tac_Toe_Board.new)
+# p g.start_game

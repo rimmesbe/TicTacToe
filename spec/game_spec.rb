@@ -27,11 +27,11 @@ describe Game do
       @new_game.player_two = @human_player
       [0,1].each {|s| @new_game.board.update(s, "X")}
       allow(@new_game.player_two).to receive(:gets).and_return("2")
-      expect(@new_game.game_play).to eq "The Winner is... George."
+      expect(@new_game.game_play).to eq "The Winner is George."
     end
 
     it "should return winner as Tie with 2 computer players" do
-      expect(@new_game.game_play).to eq "The Winner is... Tie Game."
+      expect(@new_game.game_play).to eq "Tie Game."
     end
   end
 end
