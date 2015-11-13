@@ -64,5 +64,8 @@ class Game
   end
 end
 
-# g = Game.new(Tic_Tac_Toe_Board.new)
-# p g.start_game
+if ARGV[0] == "run"
+  ARGV.clear
+  g = Game.new(Tic_Tac_Toe_Board.new)
+  puts g.start_game
+end
