@@ -3,7 +3,7 @@ class Board
   def initialize(rows = 0, columns = 0)
     @rows = rows
     @columns = columns
-    @current_board = set_board_up
+    @current_board = Array.new((rows * columns).times.map {|idx| idx.to_s})
   end
 
   def update(index, value)
@@ -23,12 +23,6 @@ class Board
   def spot_format(spot)
     spot.to_s.length == 1 ? " "+spot.to_s+" " : " "+spot.to_s
   end
-
-  def set_board_up
-    spot_array = []
-    (rows * columns).times {|idx| spot_array << idx.to_s}
-    spot_array
-  end
 end
 
 class Tic_Tac_Toe_Board < Board
@@ -39,7 +33,7 @@ class Tic_Tac_Toe_Board < Board
     @first_player = "X"
     @columns = 3
     @rows = 3
-    @current_board = set_board_up
+    @current_board = Array.new((rows * columns).times.map {|idx| idx.to_s})
   end
 
   def get_best_move(symbol)

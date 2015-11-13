@@ -64,5 +64,5 @@ class Game
   end
 end
 
-# g = Game.new(Tic_Tac_Toe_Board.new)
-# p g.start_game
+g = Game.new(Tic_Tac_Toe_Board.new)
+p g.start_game
