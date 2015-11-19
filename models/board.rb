@@ -68,7 +68,7 @@ class Tic_Tac_Toe_Board < Board
   end
 
   def non_valid_move(move)
-    move.match(/^[0-8]$/) ? ["X", "O"].include?(current_board[move.to_i]) : true
+    move.match(/^(?![0-8]$)/) || ["X", "O"].include?(current_board[move.to_i])
   end
 
   def tie

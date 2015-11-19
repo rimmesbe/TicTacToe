@@ -115,20 +115,20 @@ describe Tic_Tac_Toe_Board do
     end
   end
 
-  describe "#symbol_checker" do
+  describe "#symbol_check" do
     it "returns false if not X or O" do
-      expect(ttt_board.symbol_checker("C")).to be false
+      expect(ttt_board.symbol_check("C")).to be false
     end
 
     it "returns true if X or O" do
-      expect(ttt_board.symbol_checker("X")).to be true
-      expect(ttt_board.symbol_checker("O")).to be true
+      expect(ttt_board.symbol_check("X")).to be true
+      expect(ttt_board.symbol_check("O")).to be true
     end
   end
 
   describe "#non_valid_move" do
     it "returns true if non-numeric string 0-8 submitted" do
-      expect(ttt_board.non_valid_move("f")).to be true
+      expect(!!ttt_board.non_valid_move("f")).to be true
     end
 
     it "returns true if X or O already in that spot" do
