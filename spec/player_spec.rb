@@ -34,13 +34,17 @@ describe Player do
   end
 
   describe "#get_move" do
-    it "returns the correct players move" do
+    it "retrieves player input for move if type == human" do
       allow(player_human).to receive(:gets).and_return("8\n")
       expect(player_human.get_move).to eq "8"
     end
 
     it "returns suggested move if type != human" do
       expect(player_computer.get_move("4")).to eq "4"
+    end
+
+    it "returns default suggested move if none given for type != human" do
+      expect(player_computer.get_move).to eq "_"
     end
   end
 
