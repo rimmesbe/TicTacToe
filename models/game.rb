@@ -14,11 +14,11 @@ class Game
     puts "#{board.title}"
     puts "Enter player one's information: "
     @player_one = Player.new
-    until board.symbol_checker(player_one.symbol) do player_one.symbol = player_one.create_symbol end
+    until board.symbol_check(player_one.symbol) do player_one.symbol = player_one.create_symbol end
     screen_reset
     puts "Enter player two's information: "
     @player_two = Player.new
-    until unique_player_symbols(player_two) && board.symbol_checker(player_two.symbol)
+    until unique_player_symbols(player_two) && board.symbol_check(player_two.symbol)
       puts "#{player_one.name} picked #{player_one.symbol}."
       player_two.symbol = player_two.create_symbol
     end

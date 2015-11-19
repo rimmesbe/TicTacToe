@@ -58,7 +58,7 @@ class Tic_Tac_Toe_Board < Board
     end
   end
 
-  def symbol_checker(symbol)
+  def symbol_check(symbol)
     if ["X", "O"].include?(symbol)
       return true
     else
