@@ -3,7 +3,7 @@ require_relative '../models/player'
 describe Player do
 
   before :each do
-      allow($stdout).to receive(:puts)
+    allow($stdout).to receive(:puts)
   end
 
   let(:player_human) {Player.new(name: "Jacob", type: "human", symbol: "X")}
@@ -12,6 +12,21 @@ describe Player do
   describe "#new" do
     it "takes 3 parameters and returns a Player object" do
       expect(player_human).to be_a Player
+    end
+
+    it "calls create_name if no name supplied" do
+      allow_any_instance_of(Player).to receive(:create_name).and_return("Adam")
+      expect(Player.new(type: "human", symbol: "X").name).to eq "Adam"
+    end
+
+    it "calls create_symbol if no symbol supplied" do
+      allow_any_instance_of(Player).to receive(:create_symbol).and_return("X")
+      expect(Player.new(name: "Jackson", type: "human").symbol).to eq "X"
+    end
+
+    it "calls choose_type if no type supplied" do
+      allow_any_instance_of(Player).to receive(:choose_type).and_return("human")
+      expect(Player.new(name: "Jackson", symbol: "X").type).to eq "human"
     end
   end
 
