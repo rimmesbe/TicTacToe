@@ -34,5 +34,15 @@ describe Game do
     it "should return winner as Tie with 2 computer players" do
       expect(new_game.game_play).to eq "Tie Game."
     end
+
+    100.times do
+      it "computer player is unbeatable" do
+        new_game.player_two = human_player
+        allow(new_game.player_two).to receive(:gets) {rand(0..8).to_s}
+        results = new_game.game_play
+        expect(["Tie Game.", "The Winner is IBM."]).to include(results)
+      end
+    end
+
   end
 end
