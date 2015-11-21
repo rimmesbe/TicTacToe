@@ -23,26 +23,81 @@ describe Game do
     end
   end
 
-  describe "#game_play" do
-    it "should return winner when there is a winner" do
-      new_game.player_two = human_player
-      [0,1].each {|s| new_game.board.update(s, "X")}
-      allow(new_game.player_two).to receive(:gets).and_return("2")
-      expect(new_game.game_play).to eq "The Winner is George."
+  describe "#setup_player_one" do
+    it "takes in 3 inputs and creates a player object" do
+      allow_any_instance_of(Player).to receive(:gets).and_return("Jeff", "human", "X")
+      new_game.setup_player_one
+      expect(new_game.player_one).to be_a Player
+      expect(new_game.player_one.name).to eq "Jeff"
+      expect(new_game.player_one.type).to eq "human"
+      expect(new_game.player_one.symbol).to eq "X"
     end
 
-    it "should return winner as Tie with 2 computer players" do
-      expect(new_game.game_play).to eq "Tie Game."
+    it "will request another symbol if invalid symbol entered" do
+      allow_any_instance_of(Player).to receive(:gets).and_return("Jeff", "human", "J", "O")
+      new_game.setup_player_one
+      expect(new_game.player_one.symbol).to eq "O"
     end
-
-    100.times do
-      it "computer player is unbeatable" do
-        new_game.player_two = human_player
-        allow(new_game.player_two).to receive(:gets) {rand(0..8).to_s}
-        results = new_game.game_play
-        expect(["Tie Game.", "The Winner is IBM."]).to include(results)
-      end
-    end
-
   end
+
+  describe "#setup_player_two" do
+    it "takes in 3 inputs and creates a player object" do
+      allow_any_instance_of(Player).to receive(:gets).and_return("Jeff", "human", "X")
+      new_game.setup_player_two
+      expect(new_game.player_two).to be_a Player
+      expect(new_game.player_two.name).to eq "Jeff"
+      expect(new_game.player_two.type).to eq "human"
+      expect(new_game.player_two.symbol).to eq "X"
+    end
+
+    it "will request another symbol if invalid symbol entered" do
+      allow_any_instance_of(Player).to receive(:gets).and_return("Jeff", "human", "J", "X")
+      new_game.setup_player_two
+      expect(new_game.player_two.symbol).to eq "X"
+    end
+
+    it "will request another symbol if player_one already has that symbol" do
+      allow_any_instance_of(Player).to receive(:gets).and_return("Jeff", "human", "O", "X")
+      new_game.setup_player_two
+      expect(new_game.player_two.symbol).to eq "X"
+    end
+  end
+
+  describe "#get_move" do
+    it "requests move input from human player" do
+      new_game.player_two = human_player
+      new_game.current_player = new_game.player_two
+      allow(new_game.player_two).to receive(:gets).and_return("4")
+      expect(new_game.get_move).to eq "4"
+    end
+
+    it "it calls Board's get_best_move if computer player" do
+      new_game.current_player = new_game.player_two
+      allow(new_game.board).to receive(:get_best_move).and_return("4")
+      expect(new_game.get_move).to eq "4"
+    end
+  end
+
+  # describe "#game_play" do
+  #   it "should return winner when there is a winner" do
+  #     new_game.player_two = human_player
+  #     [0,1].each {|s| new_game.board.update(s, "X")}
+  #     allow(new_game.player_two).to receive(:gets).and_return("2")
+  #     expect(new_game.game_play).to eq "The Winner is George."
+  #   end
+
+  #   it "should return winner as Tie with 2 computer players" do
+  #     expect(new_game.game_play).to eq "Tie Game."
+  #   end
+
+  #   # 100.times do
+  #     it "computer player is unbeatable" do
+  #       new_game.player_two = human_player
+  #       allow(new_game.player_two).to receive(:gets) {rand(0..8).to_s}
+  #       results = new_game.game_play
+  #       expect(["Tie Game.", "The Winner is IBM."]).to include(results)
+  #     end
+  #   # end
+
+  # end
 end
