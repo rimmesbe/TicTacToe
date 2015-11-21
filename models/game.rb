@@ -10,22 +10,17 @@ class Game
     @player_two = "player two"
   end
 
-  def start_game
-    puts "#{board.title}"
-    puts "Enter player one's information: "
+  def setup_player_one
     @player_one = Player.new
     until board.symbol_check(player_one.symbol) do player_one.symbol = player_one.create_symbol end
-    screen_reset
-    puts "Enter player two's information: "
+  end
+
+  def setup_player_two
     @player_two = Player.new
     until unique_player_symbols(player_two) && board.symbol_check(player_two.symbol)
       puts "#{player_one.name} picked #{player_one.symbol}."
       player_two.symbol = player_two.create_symbol
     end
-    puts "#{player_two.name}'s symbol is #{player_two.symbol}"
-    screen_reset
-    puts "As you may have guessed... X goes first."
-    game_play()
   end
 
   def game_play
@@ -36,7 +31,6 @@ class Game
         puts "#{current_player.name} make your move..."
         current_move = current_player.type == "human" ? current_player.get_move : current_player.get_move(board.get_best_move(current_player.symbol))
       end while board.non_valid_move(current_move)
-      screen_reset
       board.update(current_move.to_i, current_player.symbol)
       current_player = player_swap(current_player)
       puts board
@@ -57,15 +51,5 @@ class Game
   def player_swap(current_player)
     player_one == current_player ? player_two : player_one
   end
-
-  def screen_reset
-    sleep 1.5
-    system "clear"
-  end
 end
 
-if ARGV[0] == "run"
-  ARGV.clear
-  g = Game.new(Tic_Tac_Toe_Board.new)
-  puts g.start_game
-end
