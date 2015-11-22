@@ -51,5 +51,5 @@ if ARGV[0] == "run"
   ARGV.clear
   g = Game_Controller.new(Tic_Tac_Toe_Board.new)
   g.setup_game
-  g.play_game
+  puts g.play_game
 end
