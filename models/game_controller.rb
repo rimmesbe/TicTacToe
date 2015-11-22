@@ -1,5 +1,4 @@
 require_relative 'game'
-require_relative 'board'
 
 class Game_Controller
   attr_reader :game
@@ -29,7 +28,7 @@ class Game_Controller
       end while game.non_valid_move(game.current_move)
       next_turn
     end
-    game.game_results(game.current_player)
+    game.game_results
   end
 
   private
