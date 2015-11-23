@@ -1,7 +1,7 @@
 require_relative '../models/game'
 
 describe Game do
-  let(:new_game) {Game.new(Tic_Tac_Toe_Board.new)}
+  let(:new_game) {Game.new(Tic_Tac_Toe_Board.new, Tic_Tac_Toe_Rules.new, Tic_Tac_Toe_AI.new)}
   let(:human_player) {Player.new(name: "George", type: "human", symbol: "X")}
   let(:computer_player_one) {Player.new(name: "IBM", type: "computer", symbol: "O")}
   let(:computer_player_two) {Player.new(name: "Gateway2000", type: "computer", symbol: "X")}
@@ -77,22 +77,4 @@ describe Game do
       expect(new_game.get_move).to eq "4"
     end
   end
-
-  # describe "#game_play" do
-  #   it "should return winner when there is a winner" do
-  #     new_game.player_two = human_player
-  #     [0,1].each {|s| new_game.board.update(s, "X")}
-  #     allow(new_game.player_two).to receive(:gets).and_return("2")
-  #     expect(new_game.game_play).to eq "The Winner is George."
-  #   end
-
-  #   it "should return winner as Tie with 2 computer players" do
-  #     expect(new_game.game_play).to eq "Tie Game."
-  #   end
-
-  #   # 100.times do
-
-  #   # end
-
-  # end
 end

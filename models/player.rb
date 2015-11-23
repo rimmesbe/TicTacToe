@@ -8,7 +8,6 @@ class Player
     @symbol = args[:symbol] || create_symbol
   end
 
-
   def get_move(suggested_move = "_")
     if type == "human"
       puts "Enter your move: "
