@@ -3,8 +3,8 @@ require_relative 'game'
 class Game_Controller
   attr_reader :game
 
-  def initialize(args = {})
-    @game = Game.new(args[:board], args[:rules], args[:ai])
+  def initialize(board)
+    @game = Game.new(board)
   end
 
   def setup_game
@@ -49,7 +49,7 @@ end
 
 if ARGV[0] == "run"
   ARGV.clear
-  g = Game_Controller.new(board: Tic_Tac_Toe_Board.new, rules: Tic_Tac_Toe_Rules.new, ai: Tic_Tac_Toe_AI.new)
+  g = Game_Controller.new(Tic_Tac_Toe_Board.new)
   g.setup_game
   puts g.play_game
 end

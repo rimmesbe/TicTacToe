@@ -1,3 +1,6 @@
+require_relative 'tic_tac_toe_rules'
+require_relative 'tic_tac_toe_ai'
+
 class Board
   attr_reader :current_board, :rows, :columns
   def initialize(rows = 0, columns = 0)
@@ -26,11 +29,13 @@ class Board
 end
 
 class Tic_Tac_Toe_Board < Board
-  attr_reader :current_board
+  attr_reader :current_board, :ai, :rules
 
   def initialize
     @columns = 3
     @rows = 3
     @current_board = Array.new((rows * columns).times.map {|idx| idx.to_s})
+    @ai = Tic_Tac_Toe_AI.new
+    @rules = Tic_Tac_Toe_Rules.new
   end
 end

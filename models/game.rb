@@ -7,10 +7,10 @@ class Game
   attr_accessor :player_one, :player_two, :current_player
   attr_reader :board, :current_move, :game_rules, :ai
 
-  def initialize(game_board, rules, game_ai)
+  def initialize(game_board)
     @board = game_board
-    @game_rules = rules
-    @ai = game_ai
+    @game_rules = game_board.rules
+    @ai = game_board.ai
     @player_one = "player one"
     @player_two = "player two"
     @current_player = @player_one
