@@ -1,7 +1,7 @@
 require_relative '../models/game_controller'
 
 describe Game_Controller do
-  let(:new_game_controller) {Game_Controller.new(board: Tic_Tac_Toe_Board.new, rules: Tic_Tac_Toe_Rules.new, ai: Tic_Tac_Toe_AI.new)}
+  let(:new_game_controller) {Game_Controller.new(Tic_Tac_Toe_Board.new)}
   let(:human_player) {Player.new(name: "George", type: "human", symbol: "X")}
   let(:computer_player_one) {Player.new(name: "IBM", type: "computer", symbol: "O")}
   let(:computer_player_two) {Player.new(name: "Gateway2000", type: "computer", symbol: "X")}
