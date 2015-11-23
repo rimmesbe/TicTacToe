@@ -1,7 +1,5 @@
 require_relative 'board'
 require_relative 'player'
-require_relative 'tic_tac_toe_rules'
-require_relative 'tic_tac_toe_ai'
 
 class Game
   attr_accessor :player_one, :player_two, :current_player
