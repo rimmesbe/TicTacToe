@@ -6,4 +6,4 @@ To Run tests: <br>
 
 To Run Game: <br>
 1)make sure you have ruby 2.2.1 <br>
-2)run 'ruby models/game.rb <strong>run</strong>' from console, make sure to pass <strong>'run'</strong> in as <strong>ARGV</strong> <br>
+2)run 'ruby models/game_controller.rb <strong>run</strong>' from console, make sure to pass <strong>'run'</strong> in as <strong>ARGV</strong> <br>
